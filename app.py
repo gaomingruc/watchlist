@@ -1,18 +1,14 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, render_template
 app = Flask(__name__)
 
 
+name = "高明"
+movies = [
+    {"title": "流浪地球", "rate_score": "5"},
+    {"title": "test movie", "rate_score": "4"}
+]
+
+
 @app.route("/")
-def hello():
-    return "Welcome to My Watchlist!"
-
-
-@app.route("/user/<name>")
-def user_page(name):
-    return "hello, %s" % name
-
-
-@app.route("/test")
-def test_url_for():
-    content = url_for("user_page", name="ming")
-    return content
+def index():
+    return render_template("index.html", name=name, movies=movies)
