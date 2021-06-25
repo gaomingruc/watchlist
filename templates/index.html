@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ name }}的电影记录</title>
+    <title>{{ user.name }}的电影记录</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -13,7 +13,7 @@
 <body>
     <h2>
         <img class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}" alt="">
-        {{ name }}的电影记录
+        {{ user.name }}的电影记录
     </h2>
     <ul class="nav">
         <li><a href="#">主页</a></li>
@@ -22,7 +22,7 @@
     <p>{{ movies | length }}个电影记录</p>
     <ul class="movie-list">
         {% for movie in movies %}
-        <li>{{ movie.title }}的评分为{{ movie.rate_score }}</li>
+        <li>{{ movie.title }}的上映年份为{{ movie.year }}</li>
         {% endfor %}
     </ul>
     <img class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}" alt="">
