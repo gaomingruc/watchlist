@@ -12,11 +12,13 @@ db = SQLAlchemy(app)
 
 
 class User(db.Model):
+    """数据库中定义user表"""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
 
 
 class Movie(db.Model):
+    """数据库中定义movie表"""
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60))
     year = db.Column(db.String(20))
@@ -25,7 +27,7 @@ class Movie(db.Model):
 @app.cli.command()
 @click.option("--drop", is_flag=True, help="删除数据库候再新建数据库")
 def initdb(drop):
-    """初始化数据库"""
+    """使用flask initdb --drop 初始化数据库"""
     if drop:
         db.drop_all()
     db.create_all()
@@ -34,7 +36,7 @@ def initdb(drop):
 
 @app.cli.command()
 def forge():
-    """生成虚拟数据"""
+    """使用flask forge生成虚拟数据"""
     db.create_all()
 
     name = "高明"
@@ -62,6 +64,21 @@ def forge():
 
 @app.route("/")
 def index():
+    """主页视图函数"""
     user = User.query.first()
     movies = Movie.query.all()
-    return render_template("index.html", user=user, movies=movies)
+    return render_template("index.html", movies=movies)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """404错误处理函数"""
+    user = User.query.first()
+    return render_template("404.html"), 404
+
+
+@app.context_processor
+def inject_user():
+    """将user注入模版上下文，使得渲染模版时不用再传入user变量"""
+    user = User.query.first()
+    return dict(user=user)

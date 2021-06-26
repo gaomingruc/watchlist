@@ -8,6 +8,10 @@ ul {
     list-style-type: none;
 }
 
+a {
+    text-decoration-line: none;
+}
+
 .avatar {
     width: 40px;
 }
@@ -54,4 +58,8 @@ ul {
 
 footer {
     text-align: center;
+}
+
+.float-right {
+    float: right;
 }
