@@ -2,6 +2,13 @@
 
 {% block content %}
 <p>{{ movies | length }}个电影记录</p>
+<form method="post">
+    <label for="title">电影名称</label>
+    <input type="text" name="title" id="title" autocomplete="off" required>
+    <label for="year">电影年份</label>
+    <input type="text" name="year" id="year" autocomplete="off" required>
+    <input type="submit" name="submit" value="添加电影记录">
+</form>
 <ul class="movie-list">
     {% for movie in movies %}
     <li>
@@ -10,6 +17,16 @@
             <a href="https://www.douban.com/search?source=suggest&q={{ movie.title  }}" target="_blank">
                 豆瓣
             </a>
+        </span>
+        <span class="float-right">
+            <a href="{{ url_for('edit', movie_id = movie.id) }}">
+                编辑
+            </a>
+        </span>
+        <span class="float-right">
+            <form action="{{ url_for('delete', movie_id=movie.id) }}" method="POST">
+                <input value="删除" type="submit">
+            </form>
         </span>
     </li>
     {% endfor %}

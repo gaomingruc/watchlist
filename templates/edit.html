@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>编辑电影条目</h2>
+<form method="post">
+    <label for="title">电影名称</label>
+    <input type="text" name="title" id="title" autocomplete="off" required value="{{ movie.title }}">
+    <label for="year">电影年份</label>
+    <input type="text" name="year" id="year" autocomplete="off" required value="{{ movie.year }}">
+    <input type="submit" name="submit" value="修改电影记录">
+</form>
+{% endblock content %}
