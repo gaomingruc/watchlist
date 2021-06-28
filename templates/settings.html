@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>设置</h2>
+<form method="POST">
+    <label for="name">你的名字</label>
+    <input type="text" name="name" id="name" autocomplete="off" required value="{{ current_user.name }}">
+    <input type="submit">
+</form>
+{% endblock content %}
